@@ -10,7 +10,13 @@ Tech Stack:
 - lottie-react
 - SwiperJS
 
-Please make sure you are using node version above v16
+Please make sure you are using node version above v16.
+
+First, run the installations:
+
+```bash
+npm install
+```
 
 run the development server:
 
