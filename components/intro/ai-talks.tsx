@@ -1,5 +1,4 @@
 'use client'
-import Image from 'next/image'
 import React from 'react'
 import AlternatingList from '../alternating-list'
 import LottieAnimation from '../animations/LottieAnimation'
@@ -23,13 +22,6 @@ const LogoAnimation = () => <div className='flex items-center justify-center w-f
 const AiTalks = () => {
     return (
         <div className="flex justify-center w-full mt-10 overflow-hidden">
-            {/* <div className="relative min-w-[274px] h-[290px]">
-                <Image
-                    src="/icons/hexagon.svg"
-                    fill
-                    alt="Logo"
-                />
-            </div> */}
             <div>
                 <LogoAnimation />
             </div>
