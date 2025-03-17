@@ -32,7 +32,7 @@ const LottieAnimation = ({ importAnimation, lottieProps = {}, onLoaded, lottieRe
     }, [Lottie, animationData]);
 
     if (!Lottie || !animationData) return (
-        <Skeleton style={{
+        <div style={{
             height: lottieProps?.style?.height,
             width: lottieProps?.style?.height
         }} className='rounded-lg'/>
