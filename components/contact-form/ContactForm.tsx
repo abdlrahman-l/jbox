@@ -1,9 +1,13 @@
 'use client';
 import React, { memo, useRef, useState, useEffect } from 'react';
 import { gsap } from 'gsap';
-import LottieAnimation from '../animations/LottieAnimation';
 import Button from '../button';
 import Input from '../form/Input';
+import dynamic from 'next/dynamic';
+
+const LottieAnimation = dynamic(() => import('../animations/LottieAnimation'), {
+    ssr: false
+})
 
 interface FormData {
     firstName: string;

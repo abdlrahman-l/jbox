@@ -1,9 +1,13 @@
 'use client'
 import React from 'react'
 import AlternatingList from '../alternating-list'
-import LottieAnimation from '../animations/LottieAnimation'
 import Button from '../button'
 import Link from 'next/link'
+import dynamic from 'next/dynamic'
+
+const LottieAnimation = dynamic(() => import('../animations/LottieAnimation'), {
+    ssr: false
+})
 
 const LogoAnimation = () => <div className='flex items-center justify-center w-full'>
     <LottieAnimation
