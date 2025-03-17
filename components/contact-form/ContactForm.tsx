@@ -3,11 +3,7 @@ import React, { memo, useRef, useState, useEffect } from 'react';
 import { gsap } from 'gsap';
 import Button from '../button';
 import Input from '../form/Input';
-import dynamic from 'next/dynamic';
-
-const LottieAnimation = dynamic(() => import('../animations/LottieAnimation'), {
-    ssr: false
-})
+import LottieAnimation from '../animations/LottieAnimation';
 
 interface FormData {
     firstName: string;

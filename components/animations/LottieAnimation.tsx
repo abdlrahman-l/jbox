@@ -1,66 +1,43 @@
 'use client';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { useLottie } from 'lottie-react';
-import React, { Ref, useEffect } from 'react';
+import React, { Dispatch, Ref, useEffect, useState } from 'react';
 import Skeleton from '../skeleton';
 
+
 type LottieAnimationProps = {
-  importAnimation: (cb: (animationData: any) => void) => void;
-  lottieProps?: Record<string, any>;
-  onLoaded?: () => void;
-  lottieRef?: Ref<any>;
-  playAnimation?: boolean;
-  showPlaceholder?: boolean;
+    importAnimation: (cb: Dispatch<any>) => void;
+    lottieProps?: Record<string, any>;
+    onLoaded?: () => void;
+    lottieRef?: Ref<any>; 
 };
+const LottieAnimation = ({ importAnimation, lottieProps = {}, onLoaded, lottieRef }: LottieAnimationProps) => {
+    const [animationData, setAnimationData] = useState<any>();
+    const [Lottie, setLottie] = useState<any>();
+    
+    useEffect(() => {
+        importAnimation(setAnimationData);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
-const LottieAnimation = ({
-  importAnimation,
-  lottieProps = {},
-  onLoaded,
-  lottieRef,
-  playAnimation,
-  showPlaceholder = true
-}: LottieAnimationProps) => {
-  const [animationData, setAnimationData] = React.useState<any>(null);
+    useEffect(() => {
+        import('lottie-react/build/index').then((l) => setLottie(l));
+    }, []);
 
-  useEffect(() => {
-    importAnimation(setAnimationData);
-  }, [importAnimation]);
+    useEffect(() => {
+        if (Lottie && animationData) {
+            onLoaded?.();
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [Lottie, animationData]);
 
-  const options = {
-    animationData,
-    ...lottieProps,
-    lottieRef,
-  };
-
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  const { View, play } = useLottie(options);
-
-  if (playAnimation) {
-    play();
-  }
-
-  useEffect(() => {
-    if (animationData) {
-      onLoaded?.();
-    }
-  }, [animationData, onLoaded]);
-
-  if (!animationData && !showPlaceholder) {
-    return (
-      <Skeleton
-        style={{
-          height: lottieProps?.style?.height,
-          width: lottieProps?.style?.height,
-        }}
-        className='rounded-lg'
-      />
-    );
-  }
-
-  return View;
+    if (!Lottie || !animationData) return (
+        <Skeleton style={{
+            height: lottieProps?.style?.height,
+            width: lottieProps?.style?.height
+        }} className='rounded-lg'/>
+    )
+    
+    return <Lottie.default ref={lottieRef} animationData={animationData} {...lottieProps} />;
 };
-
 export default LottieAnimation;

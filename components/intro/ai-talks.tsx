@@ -4,10 +4,7 @@ import AlternatingList from '../alternating-list'
 import Button from '../button'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
-
-const LottieAnimation = dynamic(() => import('../animations/LottieAnimation'), {
-    ssr: false
-})
+import LottieAnimation from '../animations/LottieAnimation'
 
 const LogoAnimation = () => <div className='flex items-center justify-center w-full'>
     <LottieAnimation
